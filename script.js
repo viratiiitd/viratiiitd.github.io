@@ -200,3 +200,35 @@ document.head.appendChild(style);
 // Console welcome message
 console.log('%c👋 Welcome to Virat Singh\'s Portfolio!', 'color: #2563eb; font-size: 20px; font-weight: bold;');
 console.log('%cFeel free to explore the code and get in touch!', 'color: #6b7280; font-size: 14px;'); 
+
+// Carousel navigation for Positions of Responsibility
+function setupCarousel() {
+    const carousel = document.querySelector('.positions-carousel');
+    const leftArrow = document.querySelector('.carousel-arrow.left');
+    const rightArrow = document.querySelector('.carousel-arrow.right');
+    if (!carousel || !leftArrow || !rightArrow) return;
+
+    const scrollAmount = 280; // px per click
+
+    leftArrow.addEventListener('click', () => {
+        carousel.scrollBy({ left: -scrollAmount, behavior: 'smooth' });
+    });
+    rightArrow.addEventListener('click', () => {
+        carousel.scrollBy({ left: scrollAmount, behavior: 'smooth' });
+    });
+
+    // Optional: hide arrows if not scrollable
+    function updateArrows() {
+        if (carousel.scrollWidth <= carousel.clientWidth + 10) {
+            leftArrow.style.visibility = 'hidden';
+            rightArrow.style.visibility = 'hidden';
+        } else {
+            leftArrow.style.visibility = 'visible';
+            rightArrow.style.visibility = 'visible';
+        }
+    }
+    updateArrows();
+    window.addEventListener('resize', updateArrows);
+}
+
+document.addEventListener('DOMContentLoaded', setupCarousel); 
